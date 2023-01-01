@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.MyBean;
 import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.MyBeanWithDependency;
+import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.properties.MyBeanWithProperties;
 import com.fundamentosplatzi.springboot.fundamentosplatzi.components.ComponentDependency;
 
 @SpringBootApplication
@@ -17,14 +18,19 @@ public class FundamentosPlatziApplication implements CommandLineRunner {
 	private MyBean myBean;
 	private MyBeanWithDependency myBeanWithDependency;
 
+	// Properties
+	private MyBeanWithProperties myBeanWithProperties;
+
 	public FundamentosPlatziApplication(
 		@Qualifier("componentTwoImplement") ComponentDependency componentDependency,
 		MyBean myBean,
-		MyBeanWithDependency myBeanWithDependency
+		MyBeanWithDependency myBeanWithDependency,
+		MyBeanWithProperties myBeanWithProperties
 	) {
 		this.componentDependency = componentDependency;
 		this.myBean = myBean;
 		this.myBeanWithDependency = myBeanWithDependency;
+		this.myBeanWithProperties = myBeanWithProperties;
 	}
 
 	public static void main(String[] args) {
@@ -37,6 +43,7 @@ public class FundamentosPlatziApplication implements CommandLineRunner {
 		componentDependency.saludar();
 		myBean.print();
 		myBeanWithDependency.printWithDependency();
+		System.out.println(myBeanWithProperties.function());
 	}
 
 }
