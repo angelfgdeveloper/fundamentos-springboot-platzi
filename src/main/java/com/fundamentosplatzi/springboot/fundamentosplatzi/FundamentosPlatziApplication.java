@@ -9,6 +9,7 @@ import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.MyBean;
 import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.MyBeanWithDependency;
 import com.fundamentosplatzi.springboot.fundamentosplatzi.bean.properties.MyBeanWithProperties;
 import com.fundamentosplatzi.springboot.fundamentosplatzi.components.ComponentDependency;
+import com.fundamentosplatzi.springboot.fundamentosplatzi.pojo.UserPojo;
 
 @SpringBootApplication
 public class FundamentosPlatziApplication implements CommandLineRunner {
@@ -20,17 +21,20 @@ public class FundamentosPlatziApplication implements CommandLineRunner {
 
 	// Properties
 	private MyBeanWithProperties myBeanWithProperties;
+	private UserPojo userPojo;
 
 	public FundamentosPlatziApplication(
 		@Qualifier("componentTwoImplement") ComponentDependency componentDependency,
 		MyBean myBean,
 		MyBeanWithDependency myBeanWithDependency,
-		MyBeanWithProperties myBeanWithProperties
+		MyBeanWithProperties myBeanWithProperties,
+		UserPojo userPojo
 	) {
 		this.componentDependency = componentDependency;
 		this.myBean = myBean;
 		this.myBeanWithDependency = myBeanWithDependency;
 		this.myBeanWithProperties = myBeanWithProperties;
+		this.userPojo = userPojo;
 	}
 
 	public static void main(String[] args) {
@@ -44,6 +48,8 @@ public class FundamentosPlatziApplication implements CommandLineRunner {
 		myBean.print();
 		myBeanWithDependency.printWithDependency();
 		System.out.println(myBeanWithProperties.function());
+
+		System.out.println(userPojo.getEmail() + " " + userPojo.getPassword());
 	}
 
 }
